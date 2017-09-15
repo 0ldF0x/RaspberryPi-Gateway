@@ -109,12 +109,14 @@ var transporter = nodemailer.createTransport({
 
 //global.LOG = function(data) { process.stdout.write(data || ''); }
 //global.LOGln = function(data) { process.stdout.write((data || '') + '\n'); }
-global.sendEmail = function(SUBJECT, BODY) {
+global.sendEmail = function(SUBJECT, BODY, ATTACHMENTURL) {
   var mailOptions = {
     from: 'Moteino Gateway <gateway@moteino.com>',
     to: settings.credentials.emailAlertsTo.value, // list of receivers, comma separated
     subject: SUBJECT,
-    text: BODY
+    text: BODY,
+    attachments: [
+            {path: ATTACHMENTURL}]
     //html: '<b>Hello world ?</b>' // html body
   };
   transporter.sendMail(mailOptions, function(error, info) {
